@@ -1,0 +1,394 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  box-sizing: border-box;
+  background: url(1.jpg);
+}
+main {
+  width: 76%;
+  background-position: center;
+  background-size: cover;
+  height: 120vh;
+  margin-bottom: 0;
+  float: left;
+}
+hr {
+  height: 2px;
+  background-color: #fff;
+}
+img {
+  float: right;
+  border-radius: 100%;
+}
+.image {
+  padding-left: 80px;
+}
+.header {
+  background-color: #000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+.menu ul {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+}
+.srch {
+  border: none;
+  border-radius: 4px;
+  height: 1.5rem;
+  width: 15rem;
+  padding: 1em;
+}
+.btn {
+  background-color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 0.6rem;
+}
+
+.logo {
+  color: #ff7200;
+  font-size: 35px;
+  font-family: Arial;
+  padding-left: 20px;
+
+  padding-top: 10px;
+  margin-top: 5px;
+}
+ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-family: Arial;
+  font-weight: bold;
+  transition: 0.4s ease-in-out;
+}
+
+ul li a:hover {
+  color: #ff7200;
+}
+
+.search {
+  width: 330px;
+  float: left;
+  margin-left: 270px;
+}
+
+.srch {
+  font-family: "Times New Roman";
+  width: 200px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid #ff7200;
+  margin-top: 13px;
+  color: #fff;
+  border-right: none;
+  font-size: 16px;
+  float: left;
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.btn {
+  width: 100px;
+  height: 40px;
+  background: #ff7200;
+  border: 2px solid #ff7200;
+  margin-top: 13px;
+  color: #fff;
+  font-size: 15px;
+  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.btn:hover {
+  color: #000;
+}
+
+.login_btn {
+  background: #fff;
+  color: #000;
+  border: 2px solid #fff;
+}
+.login_btn:hover {
+  background: #000;
+  color: #fff;
+}
+.signup_btn {
+  background: #000;
+  color: #fff;
+  border: 2px solid #000;
+}
+.signup_btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.srch:focus {
+  outline: none;
+}
+
+.home {
+  height: auto;
+  color: #fff;
+  position: relative;
+  border: 2px solid #000;
+  padding: 20px;
+  margin-top: 0;
+  width: 100%;
+}
+
+.home .par {
+  padding-left: 16px;
+  padding-bottom: 25px;
+  font-family: Arial;
+  letter-spacing: 1.2px;
+  line-height: 30px;
+}
+
+.home h1 {
+  font-family: "Times New Roman";
+  font-size: 50px;
+  padding-left: 20px;
+  margin-top: 3%;
+  letter-spacing: 2px;
+}
+
+.home .cn {
+  width: 160px;
+  height: 40px;
+  background: #4caf50;
+  border: none;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+.home .cn a {
+  text-decoration: none;
+  color: #000;
+  transition: 0.3s ease;
+}
+
+.cn:hover {
+  background-color: #fff;
+}
+
+.home span {
+  color: #ff7200;
+  font-size: 65px;
+}
+
+.intro {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgba(0, 0, 0, 0.8) 50%
+  );
+  display: flex;
+  padding: 3rem;
+  /* margin-left: 1rem; */
+  border: solid 2px #fff;
+  margin: 20px;
+  margin-top: 50px;
+  height: 76vh;
+}
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.profile-picture .border {
+  border: none;
+  border-radius: 50%;
+  margin-top: 3rem;
+  width: 10rem;
+  height: 10rem;
+}
+.profile-picture {
+  text-align: center;
+}
+
+.nav_bar {
+  width: 20%;
+  height: 90vh;
+
+  background: linear-gradient(
+    to top,
+    rgba(16, 16, 16, 0.8) 50%,
+    rgba(16, 16, 16, 0.8) 50%
+  );
+  float: left;
+  margin-top: 60px;
+  border-radius: 20px;
+  border: solid 5px #ffffff;
+}
+
+.nav_ba h2 {
+  width: 220px;
+  font-family: sans-serif;
+  text-align: center;
+  color: #ff7200;
+  font-size: 22px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 2px;
+  padding: 8px;
+}
+
+#demo {
+  text-align: center;
+  padding-top: 40px;
+}
+.colopser {
+  border-radius: 2px;
+  height: 30px;
+  width: 40px;
+  line-height: 20px;
+  text-decoration: none;
+  text-align: center;
+  float: right;
+  overflow: hidden;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.btnn {
+  margin-top: 50px;
+  width: 100px;
+  height: 30px;
+  background: #ffffff;
+  border: none;
+  margin-top: 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #000000;
+  transition: 0.4s ease;
+}
+.btnn:hover {
+  background: #fff;
+  color: #ff7200;
+}
+.btnn a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+nav .link {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  padding-top: 20px;
+  text-align: center;
+}
+nav .link a {
+  text-decoration: none;
+  color: #ff7200;
+}
+.liw {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.icons {
+  text-align: center;
+  position: relative;
+  bottom: 50px;
+  nav-left: auto;
+  position: relative;
+  bottom: -200px;
+}
+.icons a {
+  text-decoration: none;
+  color: #00a5bb;
+}
+.icons .ion-icon {
+  color: #fff;
+  font-size: 30px;
+  padding-left: 14px;
+  padding-top: 5px;
+  transition: 0.3s ease;
+}
+.icons .ion-icon:hover {
+  color: #ff7200;
+}
+
+.flex-container {
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  margin-top: 0%;
+  border-top: solid 2px #fff;
+  clear: both;
+  flex-direction: horizontal;
+  gap: 4rem;
+}
+
+.row {
+  flex-direction: row;
+  border: 5px solid #cccccc;
+  flex: 1 1 auto;
+}
+footer {
+  clear: both;
+  list-style-type: none;
+}
+.row-form {
+  flex-direction: row;
+  flex: 0 0 auto;
+  width: 50%;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+
+  align-content: space-between;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.col-md-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+.item {
+  font-family: "Times New Roman";
+  color: #ff7200;
+  font-size: 20px;
+  padding-left: 20px;
+  letter-spacing: 2px;
+  list-style-type: none;
+  margin-top: -5px;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.nav-item {
+  padding-top: 10px;
+  padding-left: 20px;
+}

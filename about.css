@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+header h1 {
+  font-family: "Times New Roman";
+  margin: 0;
+  font-size: 2.5rem;
+  text-align: center;
+  color: #ff7200;
+}
+
+.intro {
+  /* text-align: center; */
+  padding: 2rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.5) 50%
+  );
+  color: #fff;
+  margin: 2rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 300px;
+}
+
+.intro h2 {
+  font-family: "Times New Roman";
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ff7200;
+  margin: 0;
+}
+
+
+.icons {
+  text-align: center;
+  position: relative;
+  bottom: 50px;
+  nav-left: auto;
+  padding-top: 75px;
+  float: center;
+}
+.icons a {
+  text-decoration: none;
+  color: #00a5bb;
+}
+.icons ion-icon {
+  color: #000;
+  font-size: 30px;
+  padding-left: 14px;
+  padding-top: 5px;
+  transition: 0.3s ease;
+}
+.icons ion-icon:hover {
+  color: #ff7200;
+}
+
+.skills ul li {
+  background: #333;
+  color: #fff;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.contact {
+  height: 150px;
+  padding: 2rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.5) 50%
+  );
+  font-family: "Times New Roman";
+  color: #ff7200;
+  margin: 2rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  float: center;
+}
+
+.contact p {
+  margin: 1rem 0;
+}
+
+.contact a {
+  color: #333;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}

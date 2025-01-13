@@ -1,0 +1,44 @@
+.service {
+  background: linear-gradient(
+    to top,
+    rgba(32, 32, 32, 0.8) 50%,
+    rgba(32, 32, 32, 0.8) 50%
+  );
+  width: 85%px;
+  height: 115vh;
+  color: #fff;
+  border: 2px solid #000;
+  text-align: center;
+  border-radius: 20px;
+  margin-bottom: 0;
+  border: solid 2px #fff;
+  margin: 20px;
+}
+.ser {
+  font-family: "Times New Roman";
+  font-size: 20px;
+  margin-bottom: 10px;
+  width: 550px;
+  text-align: left;
+  margin-left: 20%;
+}
+.service h1 {
+  font-family: "Times New Roman";
+  color: #ff7200;
+  font-size: 35px;
+  margin-top: 2%;
+  letter-spacing: 2px;
+  text-align: left;
+  margin-left: 20%;
+  margin-top: 10px;
+}
+.service h2 {
+  font-family: "Times New Roman";
+  color: #66ff00c0;
+  font-size: 24px;
+  text-align: left;
+  letter-spacing: 2px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  margin-left: 20%;
+}
