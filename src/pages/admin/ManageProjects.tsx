@@ -65,6 +65,18 @@ const ManageProjects = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const isDemoMode = sessionStorage.getItem("demoMode") === "true";
+    
+    if (isDemoMode) {
+      toast({
+        title: "Demo Mode",
+        description: "File upload is disabled in demo mode. Please use an image URL instead.",
+        variant: "destructive",
+      });
+      e.target.value = ""; // Clear the file input
+      return;
+    }
+
     setUploading(true);
     try {
       const imageURL = await storageAPI.uploadImage(
@@ -89,6 +101,17 @@ const ManageProjects = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.title || !formData.description || !formData.techStack || !formData.imageURL || !formData.githubURL || !formData.liveDemoURL) {
+      toast({
+        title: "Error",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -291,30 +314,48 @@ const ManageProjects = () => {
 
                   <div>
                     <label className="block text-sm font-medium mb-2">Project Image</label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      disabled={uploading}
-                      className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                    {uploading && <p className="text-sm text-muted-foreground mt-2">Uploading...</p>}
-                    {formData.imageURL && (
-                      <img
-                        src={formData.imageURL}
-                        alt="Preview"
-                        className="mt-2 w-full h-40 object-cover rounded-lg"
+                    <div className="space-y-2">
+                      <input
+                        type="text"
+                        value={formData.imageURL}
+                        onChange={(e) => setFormData({ ...formData, imageURL: e.target.value })}
+                        placeholder="https://example.com/image.jpg or upload below"
+                        className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                       />
-                    )}
+                      <div className="text-sm text-muted-foreground text-center">OR</div>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        disabled={uploading || isDemoMode}
+                        className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+                      />
+                      {isDemoMode && (
+                        <p className="text-xs text-muted-foreground">
+                          File upload disabled in demo mode. Use image URL instead.
+                        </p>
+                      )}
+                      {uploading && <p className="text-sm text-muted-foreground">Uploading...</p>}
+                      {formData.imageURL && (
+                        <img
+                          src={formData.imageURL}
+                          alt="Preview"
+                          className="mt-2 w-full h-40 object-cover rounded-lg"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x300?text=Invalid+Image+URL';
+                          }}
+                        />
+                      )}
+                    </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium mb-2">GitHub URL</label>
                     <input
-                      type="url"
+                      type="text"
                       value={formData.githubURL}
                       onChange={(e) => setFormData({ ...formData, githubURL: e.target.value })}
-                      required
+                      placeholder="https://github.com/username/repo"
                       className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
@@ -322,10 +363,10 @@ const ManageProjects = () => {
                   <div>
                     <label className="block text-sm font-medium mb-2">Live Demo URL</label>
                     <input
-                      type="url"
+                      type="text"
                       value={formData.liveDemoURL}
                       onChange={(e) => setFormData({ ...formData, liveDemoURL: e.target.value })}
-                      required
+                      placeholder="https://your-project.com"
                       className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>

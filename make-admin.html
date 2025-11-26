@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Set Admin User</title>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js';
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDFYX6WA-GVrMSExo3sWbMw_dvv7gg1aG8",
+      authDomain: "yasin-husen-portfolio.firebaseapp.com",
+      projectId: "yasin-husen-portfolio",
+      storageBucket: "yasin-husen-portfolio.firebasestorage.app",
+      messagingSenderId: "489170254740",
+      appId: "1:489170254740:web:59c0c3fa054d3af8cfad81"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const functions = getFunctions(app);
+
+    window.makeAdmin = async function() {
+      const email = document.getElementById('email').value;
+      if (!email) {
+        alert('Please enter an email');
+        return;
+      }
+
+      try {
+        const setAdminClaim = httpsCallable(functions, 'setAdminClaim');
+        const result = await setAdminClaim({ email });
+        document.getElementById('result').innerHTML = 
+          `<p style="color: green;">✓ ${result.data.message}</p>
+           <p>The user needs to sign out and sign in again for the changes to take effect.</p>`;
+      } catch (error) {
+        document.getElementById('result').innerHTML = 
+          `<p style="color: red;">✗ Error: ${error.message}</p>`;
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Set Admin User</h1>
+  <p>Enter the email of the user you want to make admin:</p>
+  <input type="email" id="email" placeholder="user@example.com" />
+  <button onclick="makeAdmin()">Make Admin</button>
+  <div id="result"></div>
+  
+  <hr style="margin: 30px 0;">
+  <p><strong>Instructions:</strong></p>
+  <ol>
+    <li>Update the Firebase config in this file</li>
+    <li>Make sure the user account exists in Firebase Authentication</li>
+    <li>Enter their email and click "Make Admin"</li>
+    <li>The user must sign out and sign in again</li>
+  </ol>
+</body>
+</html>
