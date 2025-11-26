@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated admin
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+    
+    // Projects collection - public read, admin write
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Skills collection - public read, admin write
+    match /skills/{skillId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // About document - public read, admin write
+    match /about/profile {
+      allow read: if true;
+      allow update: if isAdmin();
+    }
+    
+    // Messages collection - public can create only, admin can read/delete
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, delete, update: if isAdmin();
+    }
+    
+    // Admin users collection - only admin can read
+    match /admins/{adminId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

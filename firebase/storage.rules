@@ -1,0 +1,38 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper function to check if user is authenticated admin
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+    
+    // Validate image file types
+    function isImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+    
+    // Validate file size (max 5MB)
+    function isValidSize() {
+      return request.resource.size < 5 * 1024 * 1024;
+    }
+    
+    // Project images - public read, admin write
+    match /projects/{imageId} {
+      allow read: if true;
+      allow write: if isAdmin() && isImage() && isValidSize();
+    }
+    
+    // Profile images - public read, admin write
+    match /profile/{imageId} {
+      allow read: if true;
+      allow write: if isAdmin() && isImage() && isValidSize();
+    }
+    
+    // General uploads - admin only
+    match /uploads/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidSize();
+    }
+  }
+}
