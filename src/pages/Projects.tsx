@@ -9,77 +9,91 @@ import project4 from "@/assets/project-4.jpg";
 import project5 from "@/assets/project-5.jpg";
 import project6 from "@/assets/project-6.jpg";
 
+const defaultProjects = [
+  {
+    title: "AI-Powered Analytics Platform",
+    description:
+      "A comprehensive analytics dashboard with AI-driven insights for business intelligence and data visualization.",
+    image: project1,
+    tags: ["React", "Node.js", "MongoDB", "TensorFlow"],
+    github: "https://github.com/yasinhusenwako/analytics-platform",
+    demo: "https://analytics-demo.example.com",
+  },
+  {
+    title: "E-Commerce Marketplace",
+    description:
+      "Full-stack e-commerce platform with payment integration, inventory management, and real-time order tracking.",
+    image: project2,
+    tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
+    github: "https://github.com/yasinhusenwako/ecommerce-app",
+    demo: "https://ecommerce-demo.example.com",
+  },
+  {
+    title: "Mobile Fitness Tracker",
+    description:
+      "Cross-platform mobile app for fitness tracking with workout plans, progress analytics, and social features.",
+    image: project3,
+    tags: ["React Native", "Firebase", "TypeScript"],
+    github: "https://github.com/yasinhusenwako/fitness-tracker",
+    demo: "https://fitness-demo.example.com",
+  },
+  {
+    title: "Project Management Suite",
+    description:
+      "Collaborative project management tool with kanban boards, time tracking, and team communication features.",
+    image: project4,
+    tags: ["Vue.js", "Express", "Socket.io", "MySQL"],
+    github: "https://github.com/yasinhusenwako/project-suite",
+    demo: "https://project-demo.example.com",
+  },
+  {
+    title: "Social Media Dashboard",
+    description:
+      "Unified dashboard for managing multiple social media accounts with analytics and scheduling capabilities.",
+    image: project5,
+    tags: ["React", "GraphQL", "PostgreSQL", "AWS"],
+    github: "https://github.com/yasinhusenwako/social-dashboard",
+    demo: "https://social-demo.example.com",
+  },
+  {
+    title: "Task Automation Platform",
+    description:
+      "No-code automation platform for connecting apps and automating workflows with a visual builder interface.",
+    image: project6,
+    tags: ["Angular", "Python", "Docker", "Kubernetes"],
+    github: "https://github.com/yasinhusenwako/automation-platform",
+    demo: "https://automation-demo.example.com",
+  },
+];
+
 const Projects = () => {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<any[]>(defaultProjects);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load projects from localStorage
-    const localProjects = JSON.parse(localStorage.getItem("demoProjects") || "[]");
-    
-    if (localProjects.length > 0) {
-      setProjects(localProjects);
-    } else {
-      // Use default projects if none in localStorage
-      setProjects(defaultProjects);
-    }
-  }, []);
+    const fetchProjects = async () => {
+      try {
+        const { collection, getDocs } = await import("firebase/firestore");
+        const { db } = await import("@/lib/firebase");
+        
+        const querySnapshot = await getDocs(collection(db, "projects"));
+        const fetchedProjects = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        
+        if (fetchedProjects.length > 0) {
+          setProjects(fetchedProjects);
+        }
+      } catch (error) {
+        console.log("Using default projects");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const defaultProjects = [
-    {
-      title: "AI-Powered Analytics Platform",
-      description:
-        "A comprehensive analytics dashboard with AI-driven insights for business intelligence and data visualization.",
-      image: project1,
-      tags: ["React", "Node.js", "MongoDB", "TensorFlow"],
-      github: "https://github.com/yasinhusenwako/analytics-platform",
-      demo: "https://analytics-demo.example.com",
-    },
-    {
-      title: "E-Commerce Marketplace",
-      description:
-        "Full-stack e-commerce platform with payment integration, inventory management, and real-time order tracking.",
-      image: project2,
-      tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
-      github: "https://github.com/yasinhusenwako/ecommerce-app",
-      demo: "https://ecommerce-demo.example.com",
-    },
-    {
-      title: "Mobile Fitness Tracker",
-      description:
-        "Cross-platform mobile app for fitness tracking with workout plans, progress analytics, and social features.",
-      image: project3,
-      tags: ["React Native", "Firebase", "TypeScript"],
-      github: "https://github.com/yasinhusenwako/fitness-tracker",
-      demo: "https://fitness-demo.example.com",
-    },
-    {
-      title: "Project Management Suite",
-      description:
-        "Collaborative project management tool with kanban boards, time tracking, and team communication features.",
-      image: project4,
-      tags: ["Vue.js", "Express", "Socket.io", "MySQL"],
-      github: "https://github.com/yasinhusenwako/project-suite",
-      demo: "https://project-demo.example.com",
-    },
-    {
-      title: "Social Media Dashboard",
-      description:
-        "Unified dashboard for managing multiple social media accounts with analytics and scheduling capabilities.",
-      image: project5,
-      tags: ["React", "GraphQL", "PostgreSQL", "AWS"],
-      github: "https://github.com/yasinhusenwako/social-dashboard",
-      demo: "https://social-demo.example.com",
-    },
-    {
-      title: "Task Automation Platform",
-      description:
-        "No-code automation platform for connecting apps and automating workflows with a visual builder interface.",
-      image: project6,
-      tags: ["Angular", "Python", "Docker", "Kubernetes"],
-      github: "https://github.com/yasinhusenwako/automation-platform",
-      demo: "https://automation-demo.example.com",
-    },
-  ];
+    fetchProjects();
+  }, []);
 
   return (
     <PageLayout>

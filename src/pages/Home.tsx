@@ -209,7 +209,7 @@ const Home = () => {
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
-              { value: "20+", label: "Projects Completed", icon: "📊" },
+              { value: "50+", label: "Projects Completed", icon: "📊" },
               { value: "15+", label: "Happy Clients", icon: "😊" },
               { value: "5+", label: "Years Experience", icon: "⚡" },
               { value: "95%", label: "Success Rate", icon: "🎯" },

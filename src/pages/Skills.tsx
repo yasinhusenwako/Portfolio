@@ -14,24 +14,40 @@ import PageLayout from "@/components/PageLayout";
 
 const Skills = () => {
   const [skillCategories, setSkillCategories] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Load skills from localStorage
-    const localSkills = JSON.parse(localStorage.getItem("demoSkills") || "[]");
-    
-    if (localSkills.length > 0) {
-      // Map localStorage skills to display format
-      const mappedSkills = localSkills.map((skill: any, index: number) => ({
-        title: skill.category,
-        icon: getIconForCategory(index),
-        color: getColorForCategory(index),
-        skills: skill.skills.map((s: string) => ({ name: s, level: 90 })),
-      }));
-      setSkillCategories(mappedSkills);
-    } else {
-      // Use default skills if none in localStorage
-      setSkillCategories(defaultSkillCategories);
-    }
+    const fetchSkills = async () => {
+      try {
+        const { collection, getDocs } = await import("firebase/firestore");
+        const { db } = await import("@/lib/firebase");
+        
+        const querySnapshot = await getDocs(collection(db, "skills"));
+        const fetchedSkills = querySnapshot.docs.map(doc => doc.data());
+        
+        if (fetchedSkills.length > 0) {
+          const mappedSkills = fetchedSkills.map((skill: any, index: number) => ({
+            title: skill.category,
+            icon: getIconForCategory(index),
+            color: getColorForCategory(index),
+            skills: (skill.skills || []).map((s: string) => ({ 
+              name: s, 
+              level: 85 + Math.floor(Math.random() * 15)
+            })),
+          }));
+          setSkillCategories(mappedSkills);
+        } else {
+          setSkillCategories(defaultSkillCategories);
+        }
+      } catch (error) {
+        console.log("Using default skills");
+        setSkillCategories(defaultSkillCategories);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
   }, []);
 
   const getIconForCategory = (index: number) => {

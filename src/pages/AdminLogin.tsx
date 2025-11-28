@@ -21,19 +21,6 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      // Demo mode - bypass authentication for testing
-      if (formData.email === "demo@admin.com" && formData.password === "demo123") {
-        toast({
-          title: "Demo Mode",
-          description: "Logged in as demo admin (read-only)",
-        });
-        
-        // Store demo flag in sessionStorage
-        sessionStorage.setItem("demoMode", "true");
-        navigate("/admin/dashboard");
-        return;
-      }
-
       await signIn(formData.email, formData.password);
       
       toast({
@@ -45,7 +32,7 @@ const AdminLogin = () => {
     } catch (error: any) {
       toast({
         title: "Login Failed",
-        description: error.message || "Invalid credentials. Try demo@admin.com / demo123 for demo mode.",
+        description: error.message || "Invalid credentials. Please check your email and password.",
         variant: "destructive",
       });
     } finally {

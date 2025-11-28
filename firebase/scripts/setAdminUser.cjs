@@ -2,27 +2,22 @@
  * Set admin claim for a user
  * Run this script to grant admin privileges to a user
  * 
- * Usage: ts-node setAdminUser.ts your-email@example.com
+ * Usage: node setAdminUser.js your-email@example.com
  */
 
-import * as admin from "firebase-admin";
-import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-
-// Get current directory
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const admin = require("firebase-admin");
+const fs = require("fs");
+const path = require("path");
 
 // Initialize Firebase Admin
-const serviceAccountPath = join(__dirname, "..", "serviceAccountKey.json");
-const serviceAccount = JSON.parse(readFileSync(serviceAccountPath, "utf8"));
+const serviceAccountPath = path.join(__dirname, "..", "serviceAccountKey.json");
+const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-async function setAdminClaim(email: string) {
+async function setAdminClaim(email) {
   try {
     console.log(`🔍 Looking up user: ${email}`);
     
@@ -36,7 +31,7 @@ async function setAdminClaim(email: string) {
     console.log(`✅ Admin claim set successfully for ${email}`);
     console.log(`\n📌 The user needs to sign out and sign in again for the changes to take effect.`);
     
-  } catch (error: any) {
+  } catch (error) {
     if (error.code === "auth/user-not-found") {
       console.error(`❌ User not found: ${email}`);
       console.log(`\n💡 Create the user first using Firebase Authentication Console or:`);
@@ -54,7 +49,7 @@ const email = process.argv[2];
 
 if (!email) {
   console.error("❌ Please provide an email address");
-  console.log("Usage: ts-node setAdminUser.ts your-email@example.com");
+  console.log("Usage: node setAdminUser.js your-email@example.com");
   process.exit(1);
 }
 

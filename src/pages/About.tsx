@@ -4,7 +4,7 @@ import PageLayout from "@/components/PageLayout";
 
 const About = () => {
   const stats = [
-    { value: "20+", label: "Completed Projects", icon: TrendingUp },
+    { value: "50+", label: "Completed Projects", icon: TrendingUp },
     { value: "95%", label: "Client Satisfaction", icon: TrendingUp },
     { value: "5+", label: "Years Experience", icon: TrendingUp },
   ];

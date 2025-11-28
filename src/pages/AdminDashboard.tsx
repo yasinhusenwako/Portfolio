@@ -12,10 +12,7 @@ const AdminDashboard = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check for demo mode
-    const isDemoMode = sessionStorage.getItem("demoMode") === "true";
-    
-    if (!loading && !isDemoMode && (!user || !isAdmin)) {
+    if (!loading && (!user || !isAdmin)) {
       toast({
         title: "Access Denied",
         description: "You must be an admin to access this page",
@@ -42,9 +39,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const isDemoMode = sessionStorage.getItem("demoMode") === "true";
-
-  if (loading && !isDemoMode) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
@@ -52,7 +47,7 @@ const AdminDashboard = () => {
     );
   }
 
-  if (!isDemoMode && (!user || !isAdmin)) {
+  if (!user || !isAdmin) {
     return null;
   }
 
@@ -151,29 +146,24 @@ const AdminDashboard = () => {
             <div className="grid md:grid-cols-4 gap-6">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Total Projects</p>
-                <p className="text-3xl font-bold text-primary">
-                  {JSON.parse(localStorage.getItem("demoProjects") || "[]").length}
-                </p>
+                <p className="text-3xl font-bold text-primary">-</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Skill Categories</p>
-                <p className="text-3xl font-bold text-primary">
-                  {JSON.parse(localStorage.getItem("demoSkills") || "[]").length}
-                </p>
+                <p className="text-3xl font-bold text-primary">-</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Unread Messages</p>
-                <p className="text-3xl font-bold text-primary">
-                  {JSON.parse(localStorage.getItem("demoMessages") || "[]").filter((m: any) => !m.read).length}
-                </p>
+                <p className="text-3xl font-bold text-primary">-</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Total Messages</p>
-                <p className="text-3xl font-bold text-primary">
-                  {JSON.parse(localStorage.getItem("demoMessages") || "[]").length}
-                </p>
+                <p className="text-3xl font-bold text-primary">-</p>
               </div>
             </div>
+            <p className="text-sm text-muted-foreground mt-4">
+              Statistics will be available once you deploy Firebase Functions
+            </p>
           </motion.div>
 
           {/* Quick Actions */}

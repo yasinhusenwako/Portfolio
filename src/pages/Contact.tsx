@@ -19,35 +19,15 @@ const Contact = () => {
     e.preventDefault();
     
     try {
-      // Create message object
-      const messageData = {
-        id: Date.now().toString(),
+      // Save to Firebase Firestore
+      await addDoc(collection(db, "messages"), {
         name: formData.name,
         email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        timestamp: new Date().toISOString(),
+        timestamp: serverTimestamp(),
         read: false
-      };
-
-      // Save to localStorage for demo mode
-      const existingMessages = JSON.parse(localStorage.getItem("demoMessages") || "[]");
-      existingMessages.unshift(messageData);
-      localStorage.setItem("demoMessages", JSON.stringify(existingMessages));
-
-      // Try to save to Firebase Firestore (if configured)
-      try {
-        await addDoc(collection(db, "messages"), {
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          timestamp: serverTimestamp(),
-          read: false
-        });
-      } catch (firebaseError) {
-        console.log("Firebase not configured, using local storage only");
-      }
+      });
 
       toast({
         title: "Message sent!",
